@@ -462,22 +462,23 @@ fn group_bldgs(
     for group in partition_sidewalk_loops(app) {
         let block_id = blocks.len();
         let mut polygons = Vec::new();
-        let mut lanes = HashSet::new();
+        // TODO Whoops, maybe JUST include buildings
+        //let mut lanes = HashSet::new();
         for b in &group.bldgs {
             bldg_to_block.insert(*b, block_id);
             let bldg = app.primary.map.get_b(*b);
-            if group.proper {
+            /*if group.proper {
                 lanes.insert(bldg.sidewalk());
-            } else {
+            } else {*/
                 polygons.push(bldg.polygon.clone());
-            }
+            //}
         }
-        if group.proper {
+        /*if group.proper {
             // TODO Even better, glue the loop of sidewalks together and fill that area.
             for l in lanes {
                 polygons.push(app.primary.draw_map.get_l(l).polygon.clone());
             }
-        }
+        }*/
         blocks.push(Block {
             id: block_id,
             bldgs: group.bldgs,
