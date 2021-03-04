@@ -482,7 +482,7 @@ fn group_bldgs(
             id: block_id,
             bldgs: group.bldgs,
             borders: HashSet::new(),
-            shape: Polygon::convex_hull(polygons),
+            shape: Polygon::concave_hull(polygons, 10),
         });
     }
 

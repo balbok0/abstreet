@@ -3,7 +3,7 @@ use std::fmt;
 
 use anyhow::Result;
 use geo::algorithm::area::Area;
-use geo::algorithm::concave_hull::ConcaveHull;
+use geo::algorithm::k_nearest_concave_hull::KNearestConcaveHull;
 use geo::algorithm::convex_hull::ConvexHull;
 use geo::algorithm::intersects::Intersects;
 use geo_booleanop::boolean::BooleanOp;
@@ -333,7 +333,8 @@ impl Polygon {
 
     // TODO Result won't be a nice Ring
     pub fn intersection(&self, other: &Polygon) -> Vec<Polygon> {
-        from_multi(to_geo(self.points()).intersection(&to_geo(other.points())))
+        todo!("incompatible versions now")
+        //from_multi(to_geo(self.points()).intersection(&to_geo(other.points())))
     }
 
     pub fn convex_hull(list: Vec<Polygon>) -> Polygon {
@@ -341,14 +342,15 @@ impl Polygon {
         mp.convex_hull().into()
     }
 
-    pub fn concave_hull(list: Vec<Polygon>, concavity: f64) -> Polygon {
+    pub fn concave_hull(list: Vec<Polygon>, concavity: u32) -> Polygon {
         let mp: geo::MultiPolygon<f64> = list.into_iter().map(|p| to_geo(p.points())).collect();
-        mp.concave_hull(concavity).into()
+        mp.k_nearest_concave_hull(concavity).into()
     }
 
     pub fn polylabel(&self) -> Pt2D {
-        let pt = polylabel::polylabel(&to_geo(&self.points()), &1.0).unwrap();
-        Pt2D::new(pt.x(), pt.y())
+        self.center()
+        //let pt = polylabel::polylabel(&to_geo(&self.points()), &1.0).unwrap();
+        //Pt2D::new(pt.x(), pt.y())
     }
 
     /// Do two polygons intersect at all?
