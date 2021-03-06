@@ -335,3 +335,26 @@ impl Pathfinder {
         Some(main_path)
     }
 }
+
+use crate::{PathRequestV2, PathV2};
+
+impl Pathfinder {
+    /// Finds a path from a start to an end for a certain type of agent. Handles requests that
+    /// start or end inside access-restricted zones.
+    pub fn pathfind_v2(&self, req: PathRequestV2, map: &Map) -> Option<PathV2> {
+        self.pathfind_with_params_v2(req, map.routing_params(), map)
+    }
+
+    /// Finds a path from a start to an end for a certain type of agent. Handles requests that
+    /// start or end inside access-restricted zones. May use custom routing parameters.
+    pub fn pathfind_with_params_v2(
+        &self,
+        _req: PathRequestV2,
+        _params: &RoutingParams,
+        _map: &Map,
+    ) -> Option<PathV2> {
+        todo!()
+    }
+
+    // TODO More...
+}

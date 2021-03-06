@@ -13,6 +13,7 @@ pub use self::ch::ContractionHierarchyPathfinder;
 pub use self::dijkstra::{build_graph_for_pedestrians, build_graph_for_vehicles};
 pub use self::driving::driving_cost;
 pub use self::pathfinder::Pathfinder;
+pub use self::v2::{PathRequestV2, PathStepV2, PathV2, PositionV2};
 pub use self::walking::{walking_cost, WalkingNode};
 use crate::{
     osm, BuildingID, Lane, LaneID, LaneType, Map, Position, Traversable, TurnID, UberTurn,
@@ -25,6 +26,7 @@ mod node_map;
 mod pathfinder;
 // TODO tmp
 pub mod uber_turns;
+mod v2;
 mod walking;
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, Hash, PartialOrd, Ord)]

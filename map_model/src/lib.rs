@@ -56,7 +56,10 @@ pub use crate::objects::turn::{
 pub use crate::objects::zone::{AccessRestrictions, Zone};
 pub use crate::pathfind::uber_turns::{IntersectionCluster, UberTurn, UberTurnGroup};
 use crate::pathfind::Pathfinder;
-pub use crate::pathfind::{Path, PathConstraints, PathRequest, PathStep, RoutingParams};
+pub use crate::pathfind::{
+    Path, PathConstraints, PathRequest, PathRequestV2, PathStep, PathStepV2, PathV2, PositionV2,
+    RoutingParams,
+};
 pub use crate::traversable::{Position, Traversable};
 
 mod city;
