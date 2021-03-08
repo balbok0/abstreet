@@ -3,9 +3,9 @@ use std::fmt;
 
 use anyhow::Result;
 use geo::algorithm::area::Area;
-use geo::algorithm::k_nearest_concave_hull::KNearestConcaveHull;
 use geo::algorithm::convex_hull::ConvexHull;
 use geo::algorithm::intersects::Intersects;
+use geo::algorithm::k_nearest_concave_hull::KNearestConcaveHull;
 use geo_booleanop::boolean::BooleanOp;
 use serde::{Deserialize, Serialize};
 
@@ -342,8 +342,13 @@ impl Polygon {
         mp.convex_hull().into()
     }
 
-    pub fn concave_hull(list: Vec<Polygon>, concavity: u32) -> Polygon {
+    pub fn concave_hull(list: Vec<Polygon>, concavity: u32, save: Option<&str>) -> Polygon {
         let mp: geo::MultiPolygon<f64> = list.into_iter().map(|p| to_geo(p.points())).collect();
+
+        if let Some(n) = save {
+            abstio::write_json(format!("{}.json", n), &mp);
+        }
+
         mp.k_nearest_concave_hull(concavity).into()
     }
 

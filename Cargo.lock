@@ -1340,6 +1340,7 @@ dependencies = [
  "num-traits 0.2.14",
  "robust",
  "rstar",
+ "serde",
 ]
 
 [[package]]
@@ -1372,6 +1373,7 @@ dependencies = [
  "approx",
  "num-traits 0.2.14",
  "rstar",
+ "serde",
 ]
 
 [[package]]
@@ -1400,6 +1402,7 @@ name = "geom"
 version = "0.1.0"
 dependencies = [
  "aabb-quadtree",
+ "abstio",
  "abstutil",
  "anyhow",
  "earcutr",
